@@ -25,21 +25,21 @@ ansible-galaxy collection install community.general
 
 ## Role Variables
 
-`dotfiles_home` specifies the directory for dotfiles. Plase note that all configurations are soft linked to this location so you need
+`dotfiles_home` specifies the directory for dotfiles. Please note that all configurations are softly linked to this location, so you need
 to re-run this role in case of `dotfiles_home` change.
 
 ```yaml
 dotfiles_home: $HOME/Documents/dotfiles
 ```
 
-`git_email` and `git_name` contains the user email and name for the git. they are useful if you want to commit anything from your target.
+`git_email` and `git_name` contains the user email and name for the git. They are useful if you want to commit anything from your target.
 
 ```yaml
 git_email: parham.alvani@gmail.com
 git_name: "Parham Alvani"
 ```
 
-`github_keys_username` is using for fetching trusted keys from github, by default it fetches **1995parham** keys so you must update it.
+`github_keys_username` is using for fetching trusted keys from GitHub, by default it fetches **1995parham** keys, so you must update it.
 
 ## Example Playbook
 
