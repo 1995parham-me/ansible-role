@@ -1,38 +1,40 @@
-Role Name
-=========
+# 1995parham dotfiles
 
-A brief description of the role goes here.
+[![Travis (.com)](https://img.shields.io/travis/com/1995parham-me/ansible-role?logo=travis&style=flat-square)](https://travis-ci.com/github/1995parham-me/ansible-role)
 
-Requirements
-------------
+## Introduction
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+This role installs the Parham Alvani's dotfiles from its [source](https://github.com/1995parham/dotfiles).
+It also installs the required packages, vim plugins, etc.
 
-Role Variables
---------------
+## Requirements
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+There isn't any requirement for this role.
 
-Dependencies
-------------
+## Role Variables
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+`dotfiles_home` specifies the directory for dotfiles. Plase note that all configurations are soft linked to this location so you need
+to re-run this role in case of `dotfiles_home` change.
 
-Example Playbook
-----------------
+```yaml
+dotfiles_home: $HOME/Documents/dotfiles
+```
+
+## Example Playbook
 
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+```yaml
+# playbook.yml
+- hosts: servers
+  roles:
+    - { role: 1995parham-me, vars: { dotfiles_home: $HOME/Documents/dotfiles } }
+```
 
-License
--------
-
-BSD
-
-Author Information
-------------------
-
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+```yaml
+# requirements.yml
+- src: https://github.com/1995parham-me/ansible-role.git
+  scm: git
+  version: main
+  name: 1995parham-me
+```
