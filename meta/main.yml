@@ -30,7 +30,7 @@ galaxy_info:
   platforms:
     - name: Ubuntu
       versions:
-        - bionic
+        - focal
   # - name: SomePlatform
   #   versions:
   #   - all
