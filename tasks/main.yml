@@ -1,6 +1,6 @@
 ---
 - name: install packages
-  when: ansible_os_family == 'Ubuntu'
+  when: ansible_os_family == 'Debian'
   become: true
   apt:
     update_cache: true
@@ -20,24 +20,12 @@
     state: present
 
 - name: install packages
-  when: ansible_os_family == 'Arch'
+  when: ansible_os_family == 'Archlinux'
   become: true
-  apt:
+  pacman:
+    state: latest
     update_cache: true
-    pkg:
-      - htop
-      - atop
-      - aria2
-      - curl
-      - tmux
-      - bat
-      - neovim
-      - python-pynvim
-      - jq
-      - yamllint
-      - bmon
-      - zsh
-    state: present
+    name: git, curl, atop, zsh, tmux, bat, vim, neovim, jq, htop, python-pynvim, yamllint
 
 - name: clone dotfiles
   become: false
