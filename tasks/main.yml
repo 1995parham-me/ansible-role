@@ -23,7 +23,7 @@
   when: ansible_os_family == 'Archlinux'
   become: true
   pacman:
-    state: latest
+    state: present
     update_cache: true
     name: git, curl, atop, zsh, tmux, bat, vim, neovim, jq, htop, python-pynvim, yamllint
 
