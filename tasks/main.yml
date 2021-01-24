@@ -1,5 +1,6 @@
 ---
-- name: Install packages
+- name: install packages
+  become: true
   apt:
     update_cache: true
     pkg:
@@ -15,14 +16,14 @@
       - yamllint
       - bmon
       - zsh
-    state: latest
+    state: present
 
-- name: Clone dotfiles
+- name: clone dotfiles
   git:
     repo: https://github.com/1995parham/dotfiles
     dest: $HOME/Documents/dotfiles
 
-- name: Install dotfiles
+- name: install dotfiles
   ansible.builtin.shell:
     cmd: yes Y | $HOME/Documents/dotfiles/install.sh -y
 

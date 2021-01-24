@@ -27,9 +27,9 @@ script:
   # ansible Lint
   - ansible-lint .
   # basic role syntax check
-  - ansible-playbook tests/test.yaml -i tests/inventory --syntax-check
+  - ansible-playbook tests/test.yml -i tests/inventory --syntax-check
   # install 1995parham dotfiles
-  - ansible-playbook tests/test.yaml -i tests/inventory --become
+  - ansible-playbook tests/test.yml -i tests/inventory --become
   # test symbolic links
   - test $(readlink -f ~/.zshrc) = ~/Documents/dotfiles/zsh/zshrc
   # check command existance in both shells
