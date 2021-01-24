@@ -2,13 +2,7 @@
 os: linux
 dist: focal
 language: python
-python: "3.7"
-
-# install ansible
-addons:
-  apt:
-    packages:
-      - python-pip
+python: "3.9"
 
 install:
   # install ansible
