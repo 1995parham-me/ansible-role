@@ -1,5 +1,5 @@
 ---
-- name: install packages
+- name: install packages [debian]
   when: ansible_os_family == 'Debian'
   become: true
   apt:
@@ -19,7 +19,7 @@
       - zsh
     state: present
 
-- name: install packages
+- name: install packages [arch]
   when: ansible_os_family == 'Archlinux'
   become: true
   pacman:
@@ -27,16 +27,24 @@
     update_cache: true
     name: git, curl, atop, zsh, tmux, bat, vim, neovim, jq, htop, python-pynvim, yamllint
 
+- name: color in pacman
+  when: ansible_os_family == 'Archlinux'
+  become: true
+  replace:
+    replace: Color
+    regexp: '^#Color$'
+    path: /etc/pacman.conf
+
 - name: clone dotfiles
   become: false
   git:
     repo: https://github.com/1995parham/dotfiles
-    dest: $HOME/Documents/dotfiles
+    dest: "{{ dotfiles_home }}"
 
 - name: install dotfiles
   become: false
   ansible.builtin.shell:
-    cmd: yes Y | $HOME/Documents/dotfiles/install.sh -y
+    cmd: yes Y | {{ dotfiles_home }}/install.sh -y
 
 - name: change user shell to zsh
   become: true
