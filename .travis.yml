@@ -1,0 +1,37 @@
+---
+os: linux
+dist: bionic
+language: python
+python: "3.7"
+
+# install ansible
+addons:
+  apt:
+    packages:
+      - python-pip
+
+install:
+  # install ansible
+  - pip install ansible
+
+  # install ansible lint
+  - pip install ansible-lint
+
+  # check ansible version
+  - ansible --version
+
+  # create ansible.cfg with correct roles_path
+  - printf '[defaults]\nroles_path=../' > ansible.cfg
+
+script:
+  # ansible Lint
+  - ansible-lint .
+  # basic role syntax check
+  - ansible-playbook tests/test.yaml -i tests/inventory --syntax-check
+  # install 1995parham dotfiles
+  - ansible-playbook tests/test.yaml -i tests/inventory --become
+  # test symbolic links
+  - test $(readlink -f ~/.zshrc) = ~/Documents/dotfiles/zsh/zshrc
+  # check command existance in both shells
+  - bash -c hash nvim batcat bmon
+  - zsh -c hash nvim batcat bmon
