@@ -19,11 +19,13 @@
     state: present
 
 - name: clone dotfiles
+  become: false
   git:
     repo: https://github.com/1995parham/dotfiles
     dest: $HOME/Documents/dotfiles
 
 - name: install dotfiles
+  become: false
   ansible.builtin.shell:
     cmd: yes Y | $HOME/Documents/dotfiles/install.sh -y
 
