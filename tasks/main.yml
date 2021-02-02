@@ -46,6 +46,14 @@
   ansible.builtin.shell:
     cmd: yes Y | {{ dotfiles_home }}/install.sh -y
 
+- name: setup git local configuration file
+  file:
+    path: $HOME/.gitconfig
+
+- name: setup git name and email
+  ansible.builtin.shell:
+    cmd: git config --global user.name "{{ git_name }}" && git config --global user.email "{{ git_email }}"
+
 - name: change user shell to zsh
   become: true
   user:

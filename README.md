@@ -20,6 +20,13 @@ to re-run this role in case of `dotfiles_home` change.
 dotfiles_home: $HOME/Documents/dotfiles
 ```
 
+`git_email` and `git_name` contains the user email and name for the git. they are useful if you want to commit anything from your target.
+
+```yaml
+git_email: parham.alvani@gmail.com
+git_name: "Parham Alvani"
+```
+
 ## Example Playbook
 
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
