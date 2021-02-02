@@ -49,6 +49,7 @@
 - name: setup git local configuration file
   file:
     path: $HOME/.gitconfig
+    state: touch
 
 - name: setup git name and email
   ansible.builtin.shell:
