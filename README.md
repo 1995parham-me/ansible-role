@@ -27,6 +27,8 @@ git_email: parham.alvani@gmail.com
 git_name: "Parham Alvani"
 ```
 
+`github_keys_username` is using for fetching trusted keys from github, by default it fetches **1995parham** keys so you must update it.
+
 ## Example Playbook
 
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:

@@ -60,3 +60,9 @@
   user:
     name: "{{ ansible_user_id }}"
     shell: /bin/zsh
+
+- name: set authorized keys taken from github
+  ansible.posix.authorized_key:
+    user: "{{ ansible_user_id }}"
+    state: present
+    key: https://github.com/{{ github_keys_username }}.keys
