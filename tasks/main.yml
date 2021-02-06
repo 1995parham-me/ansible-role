@@ -49,11 +49,19 @@
 - name: setup git local configuration file
   file:
     path: $HOME/.gitconfig
-    state: touch
+    state: file
 
-- name: setup git name and email
-  ansible.builtin.shell:
-    cmd: git config --global user.name "{{ git_name }}" && git config --global user.email "{{ git_email }}"
+- name: setup git name
+  community.general.git_config:
+    name: user.name
+    scope: global
+    value: "{{ git_name }}"
+
+- name: setup git emaile
+  community.general.git_config:
+    name: user.email
+    scope: global
+    value: "{{ git_email }}"
 
 - name: change user shell to zsh
   become: true
