@@ -49,6 +49,7 @@
 - name: setup git local configuration file
   file:
     path: $HOME/.gitconfig
+    mode: 0644
     state: touch
 
 - name: setup git name
