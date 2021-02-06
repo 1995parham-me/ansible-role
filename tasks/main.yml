@@ -49,7 +49,7 @@
 - name: setup git local configuration file
   file:
     path: $HOME/.gitconfig
-    state: file
+    state: touch
 
 - name: setup git name
   community.general.git_config:
