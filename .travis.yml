@@ -17,15 +17,24 @@ install:
   # create ansible.cfg with correct roles_path
   - printf '[defaults]\nroles_path=../' > ansible.cfg
 
-script:
+before_script:
   # ansible Lint
   - ansible-lint .
+
   # basic role syntax check
   - ansible-playbook tests/test.yml -i tests/inventory --syntax-check
+
+script:
+  # install required collections
+  - ansible-galaxy collection install community.general
+
   # install 1995parham dotfiles
   - ansible-playbook tests/test.yml -i tests/inventory --become
+
+after_success:
   # test symbolic links
   - test $(readlink -f ~/.zshrc) = ~/Documents/dotfiles/zsh/zshrc
+
   # check command existance in both shells
   - bash -c hash nvim batcat bmon
   - zsh -c hash nvim batcat bmon
