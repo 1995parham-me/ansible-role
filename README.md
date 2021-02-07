@@ -9,7 +9,11 @@ It also installs the required packages, vim plugins, etc.
 
 ## Requirements
 
-There isn't any requirement for this role.
+This role depends on _community.general_ collection and there is no way for setting this in role metadata.
+
+```sh
+ansible-galaxy collection install community.general
+```
 
 ## Role Variables
 
