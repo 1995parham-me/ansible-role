@@ -17,13 +17,11 @@
 
 - name: parse 'LANG' from current locale and language configuration
   set_fact:
-    locale_lang: >
-      "{{ locale_status.stdout | regex_search('LANG=([^\n]+)', '\\1') | first }}"
+    locale_lang: "{{ locale_status.stdout | regex_search('LANG=([^\n]+)', '\\1') | first }}"
 
 - name: parse 'LANGUAGE' from current locale and language configuration
   set_fact:
-    locale_language: >
-      "{{ locale_status.stdout | regex_search('LANGUAGE=([^\n]+)', '\\1') | default([locale_lang], true) | first }}"
+    locale_language: "{{ locale_status.stdout | regex_search('LANGUAGE=([^\n]+)', '\\1') | default([locale_lang], true) | first }}"
 
 - name: >
     configure locale to '{{ config_system_locale }}'
