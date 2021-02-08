@@ -1,0 +1,19 @@
+---
+- name: install packages [debian]
+  become: true
+  apt:
+    update_cache: true
+    pkg:
+      - htop
+      - atop
+      - aria2
+      - curl
+      - tmux
+      - bat
+      - neovim
+      - python3-pynvim
+      - jq
+      - yamllint
+      - bmon
+      - zsh
+    state: present

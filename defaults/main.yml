@@ -3,3 +3,6 @@ github_keys_username: "1995parham"
 dotfiles_home: "$HOME/Documents/dotfiles"
 git_name: "Parham Alvani"
 git_email: "parham.alvani@gmail.com"
+
+config_system_locale: 'en_US.UTF-8'
+config_system_language: 'en_US.UTF-8'

@@ -1,0 +1,17 @@
+---
+- name: clone dotfiles
+  become: false
+  git:
+    repo: https://github.com/1995parham/dotfiles
+    dest: "{{ dotfiles_home }}"
+
+- name: install dotfiles
+  become: false
+  ansible.builtin.shell:
+    cmd: yes Y | {{ dotfiles_home }}/install.sh -y
+
+- name: change user shell to zsh
+  become: true
+  user:
+    name: "{{ ansible_user_id }}"
+    shell: /bin/zsh

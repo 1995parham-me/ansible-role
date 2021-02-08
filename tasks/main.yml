@@ -1,77 +1,20 @@
 ---
-- name: install packages [debian]
+- name: debian
   when: ansible_os_family == 'Debian'
-  become: true
-  apt:
-    update_cache: true
-    pkg:
-      - htop
-      - atop
-      - aria2
-      - curl
-      - tmux
-      - bat
-      - neovim
-      - python3-pynvim
-      - jq
-      - yamllint
-      - bmon
-      - zsh
-    state: present
+  import_tasks: debian.yml
 
-- name: install packages [arch]
+- name: arch
   when: ansible_os_family == 'Archlinux'
-  become: true
-  pacman:
-    state: present
-    update_cache: true
-    name: git, curl, atop, zsh, tmux, bat, vim, neovim, jq, htop, python-pynvim, yamllint
+  import_tasks: arch.yml
 
-- name: color in pacman
-  when: ansible_os_family == 'Archlinux'
-  become: true
-  replace:
-    replace: Color
-    regexp: '^#Color$'
-    path: /etc/pacman.conf
+- name: dotfiles
+  import_tasks: dotfiles.yml
 
-- name: clone dotfiles
-  become: false
-  git:
-    repo: https://github.com/1995parham/dotfiles
-    dest: "{{ dotfiles_home }}"
+- name: git
+  import_tasks: git.yml
 
-- name: install dotfiles
-  become: false
-  ansible.builtin.shell:
-    cmd: yes Y | {{ dotfiles_home }}/install.sh -y
+- name: keys
+  import_tasks: keys.yml
 
-- name: setup git local configuration file
-  file:
-    path: $HOME/.gitconfig
-    mode: 0644
-    state: touch
-
-- name: setup git name
-  community.general.git_config:
-    name: user.name
-    scope: global
-    value: "{{ git_name }}"
-
-- name: setup git emaile
-  community.general.git_config:
-    name: user.email
-    scope: global
-    value: "{{ git_email }}"
-
-- name: change user shell to zsh
-  become: true
-  user:
-    name: "{{ ansible_user_id }}"
-    shell: /bin/zsh
-
-- name: set authorized keys taken from github
-  ansible.posix.authorized_key:
-    user: "{{ ansible_user_id }}"
-    state: present
-    key: https://github.com/{{ github_keys_username }}.keys
+- name: locale
+  import_tasks: locale.yml

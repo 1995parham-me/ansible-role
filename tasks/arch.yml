@@ -1,0 +1,14 @@
+---
+- name: install packages [arch]
+  become: true
+  pacman:
+    state: present
+    update_cache: true
+    name: git, curl, atop, zsh, tmux, bat, vim, neovim, jq, htop, python-pynvim, yamllint
+
+- name: color in pacman
+  become: true
+  replace:
+    replace: Color
+    regexp: '^#Color$'
+    path: /etc/pacman.conf
