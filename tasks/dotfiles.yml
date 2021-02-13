@@ -4,11 +4,14 @@
   git:
     repo: https://github.com/1995parham/dotfiles
     dest: "{{ dotfiles_home }}"
+    update: true
+  register: dotfiles_git_update
 
 - name: install dotfiles
   become: false
   ansible.builtin.shell:
     cmd: yes Y | {{ dotfiles_home }}/install.sh -y
+  when: dotfiles_git_update.after != dotfiles_git_update.before
 
 - name: change user shell to zsh
   become: true
