@@ -4,6 +4,8 @@
     path: $HOME/.gitconfig
     mode: 0644
     state: touch
+    modification_time: preserve
+    access_time: preserve
 
 - name: setup git name
   community.general.git_config:
