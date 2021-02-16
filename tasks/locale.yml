@@ -1,11 +1,13 @@
 ---
 - name: ensure localisation files for '{{ config_system_locale }}' are available
+  become: true
   locale_gen:
     name: "{{ config_system_locale }}"
     state: present
 
 - name: >
       ensure localisation files for '{{ config_system_language }}' are available
+  become: true
   locale_gen:
     name: "{{ config_system_language }}"
     state: present
@@ -26,5 +28,6 @@
 - name: >
     configure locale to '{{ config_system_locale }}'
     and language to '{{ config_system_language }}'
+  become: true
   command: localectl set-locale LANG={{ config_system_locale }} LANGUAGE={{ config_system_language }}
   changed_when: locale_lang != config_system_locale or locale_language != config_system_language
