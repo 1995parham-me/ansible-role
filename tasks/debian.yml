@@ -1,11 +1,7 @@
 ---
-- name: update cache if the last update is more than 3600 seconds ago [debian]
-  become: true
-  apt:
-    update_cache: true
-    cache_valid_time: 3600
 - name: install packages [debian]
   become: true
+  update_cache: true
   apt:
     pkg:
       - htop
