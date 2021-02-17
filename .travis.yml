@@ -1,15 +1,14 @@
 ---
 os: linux
 dist: focal
-language: python
-python: "3.9"
+language: generic
 
 install:
   # install ansible
-  - pip install ansible
+  - pip3 install ansible
 
   # install ansible lint
-  - pip install ansible-lint
+  - pip3 install ansible-lint
 
   # check ansible version
   - ansible --version
