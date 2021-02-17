@@ -1,8 +1,8 @@
 ---
 - name: install packages [debian]
   become: true
-  update_cache: true
   apt:
+    update_cache: true
     pkg:
       - htop
       - atop
