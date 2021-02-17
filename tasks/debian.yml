@@ -1,5 +1,5 @@
 ---
-- name: update cache if the last one is more than 3600 seconds ago [debian]
+- name: update cache if the last update is more than 3600 seconds ago [debian]
   become: true
   apt:
     update_cache: true
