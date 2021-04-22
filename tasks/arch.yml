@@ -12,3 +12,10 @@
     replace: Color
     regexp: '^#Color$'
     path: /etc/pacman.conf
+
+- name: fix locale.gen file
+  become: true
+  replace:
+    replace: 'en_US.UTF-8 UTF-8'
+    regexp: '^LANG='
+    path: /etc/locale.gen
