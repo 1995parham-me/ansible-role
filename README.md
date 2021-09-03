@@ -1,6 +1,6 @@
 # 1995parham dotfiles
 
-[![Travis (.com)](https://img.shields.io/travis/com/1995parham-me/ansible-role?logo=travis&style=flat-square)](https://travis-ci.com/github/1995parham-me/ansible-role)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/1995parham-me/ansible-role/ci?label=ci&logo=github&style=flat-square)
 
 ## Introduction
 
