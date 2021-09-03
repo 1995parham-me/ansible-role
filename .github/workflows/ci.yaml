@@ -17,9 +17,9 @@ jobs:
         run: printf '[defaults]\nroles_path=../' > ansible.cfg
       - name: ansible-lint
         run: ansible-lint .
-      - run: ansible-playbook tests/test.yaml -i tests/inventory --syntax-check
+      - run: ansible-playbook tests/test.yml -i tests/inventory --syntax-check
         name: basic role syntax check
-      - run: ansible-playbook tests/test.yaml -i tests/inventory --become
+      - run: ansible-playbook tests/test.yml -i tests/inventory --become
         name: install dotfiles
       - name: test symbolic links
         run: test "$(readlink -f ~/.zshrc)" = "$HOME/Documents/dotfiles/zsh/zshrc"
