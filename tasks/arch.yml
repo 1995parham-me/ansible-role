@@ -19,3 +19,9 @@
     replace: 'en_US.UTF-8 UTF-8'
     regexp: '^LANG='
     path: /etc/locale.gen
+
+- name: clone yay from aur
+  become: false
+  git:
+    repo: https://aur.archlinux.org/yay-bin.git
+    dest: "$HOME/yay"
