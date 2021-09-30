@@ -22,7 +22,7 @@ jobs:
       - run: ansible-playbook tests/test.yml -i tests/inventory --become
         name: install dotfiles
       - name: test symbolic links
-        run: test "$(readlink -f ~/.zshrc)" = "$HOME/Documents/dotfiles/zsh/zshrc"
+        run: test "$(readlink -f ~/.zshrc)" = "$HOME/dotfiles/zsh/zshrc"
       - name: check command existance in both shells
         run: bash -c hash nvim batcat bmon
       - run: zsh -c hash nvim batcat bmon
