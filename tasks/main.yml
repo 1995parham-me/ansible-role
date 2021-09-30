@@ -7,6 +7,9 @@
   when: ansible_os_family == 'Archlinux'
   import_tasks: arch.yml
 
+- name: locale
+  import_tasks: locale.yml
+
 - name: dotfiles
   import_tasks: dotfiles.yml
 
@@ -15,6 +18,3 @@
 
 - name: keys
   import_tasks: keys.yml
-
-- name: locale
-  import_tasks: locale.yml
