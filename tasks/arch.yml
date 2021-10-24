@@ -1,10 +1,27 @@
 ---
 - name: install packages [arch]
   become: true
-  pacman:
+  community.general.pacman:
     state: present
     update_cache: true
-    name: git, curl, atop, zsh, tmux, bat, vim, neovim, jq, htop, python-pynvim, yamllint, mtr, base-devel
+    name:
+      - git
+      - curl
+      - atop
+      - zsh
+      - tmux
+      - bat
+      - vim
+      - neovim
+      - jq
+      - htop
+      - python-pynvim
+      - yamllint
+      - mtr
+      - inetutils
+      - dog
+      - man-pages
+      - base-devel
 
 - name: color in pacman
   become: true
