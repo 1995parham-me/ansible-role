@@ -1,14 +1,14 @@
 ---
 - name: ensure localisation files for '{{ config_system_locale }}' are available
   become: true
-  locale_gen:
+  community.general.locale_gen:
     name: "{{ config_system_locale }}"
     state: present
 
 - name: >
       ensure localisation files for '{{ config_system_language }}' are available
   become: true
-  locale_gen:
+  community.general.locale_gen:
     name: "{{ config_system_language }}"
     state: present
 
