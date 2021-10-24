@@ -1,6 +1,6 @@
 ---
 - name: setup git local configuration file
-  file:
+  ansible.builtin.file:
     path: $HOME/.gitconfig
     mode: 0644
     state: touch
