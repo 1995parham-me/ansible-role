@@ -7,6 +7,14 @@
 This role installs the Parham Alvani's dotfiles from its [source](https://github.com/1995parham/dotfiles).
 It also installs the required packages, vim plugins, etc.
 
+The following modules are configured with `install.sh`:
+
+- zsh, neovim, vim, tmux
+- dircolors
+- wakatime
+- git
+- bash scripts (owghat, rename, ...)
+
 ## Requirements
 
 This role depends on _community.general_ collection and there is no way for setting this in role metadata.
