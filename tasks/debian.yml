@@ -1,7 +1,7 @@
 ---
 - name: install packages [debian]
   become: true
-  apt:
+  ansible.builtin.apt:
     update_cache: true
     pkg:
       - htop
