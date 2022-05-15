@@ -4,5 +4,6 @@ dotfiles_home: "$HOME/dotfiles"
 git_name: "Parham Alvani"
 git_email: "parham.alvani@gmail.com"
 
+config_system_enabled: false
 config_system_locale: 'en_US.UTF-8'
 config_system_language: 'en_US.UTF-8'

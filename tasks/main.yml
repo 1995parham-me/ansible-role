@@ -8,6 +8,7 @@
   import_tasks: arch.yml
 
 - name: locale
+  when: config_system_enabled == 'true'
   import_tasks: locale.yml
 
 - name: dotfiles
