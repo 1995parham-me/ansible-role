@@ -3,7 +3,6 @@
   become: true
   community.general.pacman:
     state: present
-    update_cache: true
     name:
       - git
       - curl
