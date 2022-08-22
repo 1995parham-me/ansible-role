@@ -11,10 +11,8 @@
       - tmux
       - bat
       - vim
-      - neovim
       - jq
       - htop
-      - python-pynvim
       - yamllint
       - mtr
       - inetutils
@@ -36,7 +34,7 @@
     regexp: '^LANG='
     path: /etc/locale.gen
 
-- name: clone yay from aur
+- name: clone yay from aur to install it manually later
   become: false
   ansible.builtin.git:
     repo: https://aur.archlinux.org/yay-bin.git
