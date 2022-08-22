@@ -10,8 +10,6 @@
       - curl
       - tmux
       - bat
-      - neovim
-      - python3-pynvim
       - jq
       - yamllint
       - bmon

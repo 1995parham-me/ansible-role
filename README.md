@@ -9,11 +9,11 @@ It also installs the required packages, vim plugins, etc.
 
 The following modules are configured with `install.sh`:
 
-- zsh, neovim, vim, tmux
+- zsh, vim, tmux
 - dircolors
 - wakatime
 - git
-- bash scripts (owghat, rename, ...)
+- bash scripts (owghat, rename, etc.)
 
 ## Requirements
 
