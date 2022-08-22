@@ -33,9 +33,3 @@
     replace: 'en_US.UTF-8 UTF-8'
     regexp: '^LANG='
     path: /etc/locale.gen
-
-- name: clone yay from aur to install it manually later
-  become: false
-  ansible.builtin.git:
-    repo: https://aur.archlinux.org/yay-bin.git
-    dest: "$HOME/yay"
