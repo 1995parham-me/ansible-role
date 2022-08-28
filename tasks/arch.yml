@@ -27,6 +27,13 @@
     regexp: '^#Color$'
     path: /etc/pacman.conf
 
+- name: pacman loves candy
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/pacman.conf
+    regexp: '^ILoveCandy$'
+    line: ILoveCandy
+
 - name: fix locale.gen file
   become: true
   ansible.builtin.replace:
