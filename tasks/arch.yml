@@ -30,8 +30,9 @@
 - name: pacman loves candy
   become: true
   ansible.builtin.lineinfile:
+    insertafter: 'Color'
     path: /etc/pacman.conf
-    regexp: '^ILoveCandy$'
+    search_string: 'ILoveCandy'
     line: ILoveCandy
 
 - name: fix locale.gen file
