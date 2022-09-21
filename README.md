@@ -9,17 +9,17 @@ It also installs the required packages, vim plugins, etc.
 
 The following modules are configured with `install.sh`:
 
-- zsh, vim, tmux
-- dircolors
-- wakatime
-- git
-- bash scripts (owghat, rename, etc.)
+- `zsh`, `vim`, `tmux`
+- `dircolors`
+- `wakatime`
+- `git`
+- bash scripts (`owghat`, `rename`, etc.)
 
 ## Requirements
 
 This role depends on _community.general_ collection and there is no way for setting this in role metadata.
 
-```sh
+```bash
 ansible-galaxy collection install community.general
 ```
 
