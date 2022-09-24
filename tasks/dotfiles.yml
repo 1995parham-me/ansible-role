@@ -1,5 +1,5 @@
 ---
-- name: clone dotfiles
+- name: Clone dotfiles
   become: false
   ansible.builtin.git:
     repo: https://github.com/1995parham/dotfiles
@@ -7,13 +7,13 @@
     update: true
   register: dotfiles_git_update
 
-- name: install dotfiles
+- name: Install dotfiles
   become: false
   ansible.builtin.shell:
     cmd: yes Y | {{ dotfiles_home }}/install.sh -y
   when: dotfiles_git_update.after != dotfiles_git_update.before
 
-- name: change user shell to zsh
+- name: Change user shell to zsh
   become: true
   ansible.builtin.user:
     name: "{{ ansible_user_id }}"
