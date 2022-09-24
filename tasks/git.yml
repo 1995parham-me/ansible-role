@@ -1,5 +1,5 @@
 ---
-- name: setup git local configuration file
+- name: Setup git local configuration file
   ansible.builtin.file:
     path: $HOME/.gitconfig
     mode: 0644
@@ -7,13 +7,13 @@
     modification_time: preserve
     access_time: preserve
 
-- name: setup git name
+- name: Setup git name
   community.general.git_config:
     name: user.name
     scope: global
     value: "{{ git_name }}"
 
-- name: setup git email
+- name: Setup git email
   community.general.git_config:
     name: user.email
     scope: global

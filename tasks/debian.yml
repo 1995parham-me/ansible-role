@@ -1,5 +1,5 @@
 ---
-- name: install packages [debian]
+- name: Install packages [debian]
   become: true
   ansible.builtin.apt:
     update_cache: true

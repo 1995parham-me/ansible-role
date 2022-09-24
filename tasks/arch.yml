@@ -1,5 +1,5 @@
 ---
-- name: install packages [arch]
+- name: Install packages [arch]
   become: true
   community.general.pacman:
     state: present
@@ -20,14 +20,14 @@
       - man-pages
       - base-devel
 
-- name: color in pacman
+- name: Color in pacman
   become: true
   ansible.builtin.replace:
     replace: Color
     regexp: '^#Color$'
     path: /etc/pacman.conf
 
-- name: pacman loves candy
+- name: Pacman loves candy
   become: true
   ansible.builtin.lineinfile:
     insertafter: 'Color'
@@ -35,7 +35,7 @@
     search_string: 'ILoveCandy'
     line: ILoveCandy
 
-- name: fix locale.gen file
+- name: Fix locale.gen file
   become: true
   ansible.builtin.replace:
     replace: 'en_US.UTF-8 UTF-8'

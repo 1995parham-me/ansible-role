@@ -1,21 +1,21 @@
 ---
-- name: debian
+- name: Debian
   when: ansible_os_family == 'Debian'
   ansible.builtin.import_tasks: debian.yml
 
-- name: arch
+- name: Arch
   when: ansible_os_family == 'Archlinux'
   ansible.builtin.import_tasks: arch.yml
 
-- name: locale
+- name: Locale
   when: config_system_enabled == 'true'
   ansible.builtin.import_tasks: locale.yml
 
-- name: dotfiles
+- name: Dotfiles
   ansible.builtin.import_tasks: dotfiles.yml
 
-- name: git
+- name: Git
   ansible.builtin.import_tasks: git.yml
 
-- name: keys
+- name: Keys
   ansible.builtin.import_tasks: keys.yml

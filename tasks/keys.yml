@@ -1,5 +1,5 @@
 ---
-- name: set authorized keys taken from github
+- name: Set authorized keys taken from github
   ansible.posix.authorized_key:
     user: "{{ ansible_user_id }}"
     state: present
