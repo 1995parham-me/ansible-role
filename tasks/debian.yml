@@ -13,5 +13,6 @@
       - jq
       - yamllint
       - bmon
+      - btop
       - zsh
     state: present
