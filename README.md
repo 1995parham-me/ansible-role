@@ -17,7 +17,8 @@ The following modules are configured with `install.sh`:
 
 ## Requirements
 
-This role depends on _community.general_ collection and there is no way for setting this in role metadata.
+This role depends on _community.general_ collection and there is no way for setting this in role metadata,
+so you need to install it manually.
 
 ```bash
 ansible-galaxy collection install community.general
