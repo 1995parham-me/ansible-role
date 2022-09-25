@@ -34,7 +34,7 @@ galaxy_info:
     - name: Ubuntu
       versions:
         - focal
-    - name: Archlinux
+    - name: ArchLinux
   # - name: SomePlatform
   #   versions:
   #   - all
