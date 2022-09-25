@@ -1,4 +1,2 @@
 # vim: ft=yaml
-skip_list:
-  - '106'
-  - '401'
+skip_list: []
