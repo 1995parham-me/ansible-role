@@ -1,12 +1,12 @@
 ---
-- name: Ensure localisation files are available for '{{ config_system_locale }}'
+- name: Ensure localisation files are available for {{ config_system_locale }}
   become: true
   community.general.locale_gen:
     name: "{{ config_system_locale }}"
     state: present
 
 - name: >
-    Ensure localisation files are available for '{{ config_system_language }}'
+    Ensure localisation files are available for {{ config_system_language }}
   become: true
   community.general.locale_gen:
     name: "{{ config_system_language }}"
@@ -26,7 +26,7 @@
     locale_language: "{{ locale_status.stdout | regex_search('LANGUAGE=([^\n]+)', '\\1') | default([locale_lang], true) | first }}"
 
 - name: >
-    Configure locale and language to '{{ config_system_locale }}''{{ config_system_language }}'
+    Configure locale and language to {{ config_system_locale }}{{ config_system_language }}
   become: true
   ansible.builtin.command: localectl set-locale LANG={{ config_system_locale }} LANGUAGE={{ config_system_language }}
   changed_when: locale_lang != config_system_locale or locale_language != config_system_language
