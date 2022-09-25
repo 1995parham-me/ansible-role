@@ -1,7 +1,7 @@
 ---
 galaxy_info:
   role_name: ansible_role
-  namespace: 1995parham_me
+  namespace: parham_alvani
   author: Parham Alvani
   description: install @1995parham/dotfiles
   # company:
