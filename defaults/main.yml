@@ -1,6 +1,8 @@
 ---
 github_keys_username: "1995parham"
+
 dotfiles_home: "$HOME/dotfiles"
+dotfiles_repo: "https://github.com/1995parham/dotfiles"
 
 git_name: "Parham Alvani"
 git_email: "parham.alvani@gmail.com"
