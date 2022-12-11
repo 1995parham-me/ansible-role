@@ -15,4 +15,5 @@
       - bmon
       - btop
       - zsh
+      - speedtest-cli
     state: present
