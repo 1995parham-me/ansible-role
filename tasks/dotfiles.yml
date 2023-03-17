@@ -10,9 +10,9 @@
 
 - name: Install dotfiles
   become: false
-  ansible.builtin.shell:
-    cmd: yes Y | {{ dotfiles_home }}/install.sh -y
+  ansible.builtin.command: "{{ dotfiles_home }}/install.sh -y"
   when: dotfiles_git_update.after != dotfiles_git_update.before
+  changed_when: dotfiles_git_update.after != dotfiles_git_update.before
 
 - name: Change user shell to zsh
   become: true
