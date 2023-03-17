@@ -2,7 +2,7 @@
 - name: Setup git local configuration file
   ansible.builtin.file:
     path: $HOME/.gitconfig
-    mode: 0644
+    mode: "0644"
     state: touch
     modification_time: preserve
     access_time: preserve
