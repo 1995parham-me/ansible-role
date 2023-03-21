@@ -8,6 +8,12 @@
     update: true
   register: dotfiles_git_update
 
+- name: Install envs
+  become: false
+  ansible.builtin.command: "{{ dotfiles_home }}/start.sh -y env"
+  when: dotfiles_git_update.after != dotfiles_git_update.before
+  changed_when: dotfiles_git_update.after != dotfiles_git_update.before
+
 - name: Install dotfiles
   become: false
   ansible.builtin.command: "{{ dotfiles_home }}/install.sh -y"
