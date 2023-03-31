@@ -1,6 +1,8 @@
-# 1995parham dotfiles
+<h1 align="center"> 1995parham's dotfiles Ansible role </h1>
 
-![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/1995parham-me/ansible-role/ci.yaml?label=ci&logo=github&style=flat-square&branch=main)
+<p align="center">
+  <img alt="GitHub Workflow Status" src="https://img.shields.io/github/actions/workflow/status/1995parham-me/ansible-role/ci.yaml?logo=github&style=for-the-badge">
+</p>
 
 ## Introduction
 
