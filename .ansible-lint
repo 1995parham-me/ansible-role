@@ -1,3 +1,4 @@
 # vim: ft=yaml
 skip_list:
   - latest[git]
+  - command-instead-of-shell
