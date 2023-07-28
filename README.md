@@ -15,7 +15,7 @@ The following modules are configured with `install.sh`:
 - `dircolors`
 - `wakatime`
 - `git`
-- bash scripts (`owghat`, `rename`, etc.)
+- bash and python scripts (`owghat`, `rename`, etc.)
 
 ## Requirements
 
