@@ -10,7 +10,7 @@
 
 - name: Install dotfiles
   become: false
-  ansible.builtin.shell: "{{ dotfiles_home }}/install.sh -y"
+  ansible.builtin.shell: "{{ dotfiles_home }}/install.sh"
   when: dotfiles_git_update.after != dotfiles_git_update.before
   changed_when: dotfiles_git_update.after != dotfiles_git_update.before
 
