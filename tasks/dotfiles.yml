@@ -14,6 +14,12 @@
   when: dotfiles_git_update.after != dotfiles_git_update.before
   changed_when: dotfiles_git_update.after != dotfiles_git_update.before
 
+- name: Install zsh
+  become: false
+  ansible.builtin.shell: "{{ dotfiles_home }}/start.sh zsh"
+  when: dotfiles_git_update.after != dotfiles_git_update.before
+  changed_when: dotfiles_git_update.after != dotfiles_git_update.before
+
 - name: Change user shell to zsh
   become: true
   ansible.builtin.user:
