@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.13"
       - name: install ansible
@@ -15,12 +15,15 @@ jobs:
           python -m pip install --upgrade ansible ansible-lint
       - name: create ansible.cfg with correct roles_path
         run: printf '[defaults]\nroles_path=../' > ansible.cfg
-      - name: ansible-lint
-        run: ansible-lint .
-      - run: ansible-playbook tests/test.yml -i tests/inventory --syntax-check
-        name: basic role syntax check
-      - run: ansible-playbook tests/test.yml -i tests/inventory --become
-        name: install dotfiles
+
+      - name: ansible lint
+        run: ansible-lint
+
+      - name: basic ansible role syntax check
+        run: ansible-playbook tests/test.yml -i tests/inventory --syntax-check
+      - name: run test playbook which installs 1995parham dotfiles
+        run: ansible-playbook tests/test.yml -i tests/inventory --become
+
       - name: test symbolic links
         run: test "$(readlink -f ~/.zshrc.shared)" = "$HOME/dotfiles/zsh/zshrc.shared"
       - name: check command existance in both shells
