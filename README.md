@@ -52,7 +52,7 @@ Including an example of how to use your role (for instance, with variables passe
 # playbook.yml
 - hosts: servers
   roles:
-    - { role: 1995parham-me, vars: { dotfiles_home: $HOME/Documents/dotfiles } }
+    - { role: parham_alvani.ansible_role, vars: { dotfiles_home: ~/Documents/dotfiles } }
 ```
 
 ```yaml
@@ -60,5 +60,5 @@ Including an example of how to use your role (for instance, with variables passe
 - src: https://github.com/1995parham-me/ansible-role.git
   scm: git
   version: main
-  name: 1995parham-me
+  name: parham_alvani.ansible_role
 ```

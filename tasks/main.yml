@@ -8,7 +8,7 @@
   ansible.builtin.import_tasks: arch.yml
 
 - name: Locale
-  when: config_system_enabled == 'true'
+  when: config_system_enabled | bool
   ansible.builtin.import_tasks: locale.yml
 
 - name: Dotfiles

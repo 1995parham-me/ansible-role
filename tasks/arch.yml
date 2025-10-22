@@ -35,9 +35,9 @@
     search_string: 'ILoveCandy'
     line: ILoveCandy
 
-- name: Fix locale.gen file
+- name: Uncomment en_US.UTF-8 in locale.gen file
   become: true
   ansible.builtin.replace:
     replace: 'en_US.UTF-8 UTF-8'
-    regexp: '^LANG='
+    regexp: '^#en_US.UTF-8 UTF-8'
     path: /etc/locale.gen

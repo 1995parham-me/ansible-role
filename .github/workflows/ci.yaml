@@ -26,7 +26,7 @@ jobs:
 
       - name: test symbolic links
         run: test "$(readlink -f ~/.zshrc.shared)" = "$HOME/dotfiles/zsh/zshrc.shared"
-      - name: check command existance in both shells
+      - name: check command existence in bash
         run: bash -c hash nvim batcat bmon
-      - run: zsh -c hash nvim batcat bmon
-        name: check command existance in both shells
+      - name: check command existence in zsh
+        run: zsh -c hash nvim batcat bmon
