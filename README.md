@@ -19,11 +19,10 @@ The following modules are configured with `install.sh`:
 
 ## Requirements
 
-This role depends on _community.general_ collection and there is no way for setting this in role metadata,
-so you need to install it manually.
+This role depends on `community.general` and `ansible.posix` collections. Install them using:
 
 ```bash
-ansible-galaxy collection install community.general
+ansible-galaxy collection install -r requirements.yml
 ```
 
 ## Role Variables
@@ -43,6 +42,52 @@ git_name: "Parham Alvani"
 ```
 
 `github_keys_username` is using for fetching trusted keys from GitHub, by default it fetches **1995parham** keys, so you must update it.
+
+## Testing
+
+This role uses [Molecule](https://molecule.readthedocs.io/) for testing with Docker containers.
+
+### Prerequisites
+
+Install Molecule and Docker support:
+
+```bash
+pip install molecule molecule-plugins[docker] docker
+```
+
+### Run Tests
+
+Run the complete test suite (creates containers, applies role, verifies, and destroys):
+
+```bash
+molecule test
+```
+
+Or run individual steps:
+
+```bash
+# Create containers
+molecule create
+
+# Apply the role
+molecule converge
+
+# Run verification tests
+molecule verify
+
+# Login to a container for debugging
+molecule login --host ubuntu-jammy
+
+# Destroy containers
+molecule destroy
+```
+
+The test suite validates:
+- Dotfiles repository is cloned
+- Symbolic links are created correctly
+- Required packages are installed
+- Git configuration is set up
+- ZSH is installed and configured
 
 ## Example Playbook
 

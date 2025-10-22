@@ -1,0 +1,57 @@
+---
+dependency:
+  name: galaxy
+  options:
+    requirements-file: requirements.yml
+driver:
+  name: docker
+platforms:
+  - name: ubuntu-focal
+    image: ubuntu:20.04
+    pre_build_image: true
+    command: /lib/systemd/systemd
+    privileged: true
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
+    cgroupns_mode: host
+    tmpfs:
+      - /run
+      - /tmp
+  - name: ubuntu-jammy
+    image: ubuntu:22.04
+    pre_build_image: true
+    command: /lib/systemd/systemd
+    privileged: true
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
+    cgroupns_mode: host
+    tmpfs:
+      - /run
+      - /tmp
+  - name: ubuntu-noble
+    image: ubuntu:24.04
+    pre_build_image: true
+    command: /lib/systemd/systemd
+    privileged: true
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
+    cgroupns_mode: host
+    tmpfs:
+      - /run
+      - /tmp
+provisioner:
+  name: ansible
+  config_options:
+    defaults:
+      interpreter_python: auto_silent
+      callback_whitelist: profile_tasks, timer, yaml
+  inventory:
+    host_vars:
+      ubuntu-focal:
+        ansible_user: root
+      ubuntu-jammy:
+        ansible_user: root
+      ubuntu-noble:
+        ansible_user: root
+verifier:
+  name: ansible

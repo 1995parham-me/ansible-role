@@ -2,31 +2,55 @@
 name: ci
 on:
   - push
+  - pull_request
 jobs:
-  build:
+  lint:
+    name: Lint
     runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install ansible ansible-lint
+
+      - name: Run ansible-lint
+        run: ansible-lint
+
+  molecule:
+    name: Molecule Test
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        distro:
+          - ubuntu:24.04
+          - ubuntu:25.04
+          - ubuntu:25.10
+          - archlinux:base
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-python@v6
         with:
           python-version: "3.13"
-      - name: install ansible
+
+      - name: Install dependencies
         run: |
-          python -m pip install --upgrade ansible ansible-lint
-      - name: create ansible.cfg with correct roles_path
-        run: printf '[defaults]\nroles_path=../' > ansible.cfg
+          python -m pip install --upgrade pip
+          python -m pip install ansible molecule molecule-plugins[docker] docker
 
-      - name: ansible lint
-        run: ansible-lint
+      - name: Install Ansible collections
+        run: ansible-galaxy collection install -r requirements.yml
 
-      - name: basic ansible role syntax check
-        run: ansible-playbook tests/test.yml -i tests/inventory --syntax-check
-      - name: run test playbook which installs 1995parham dotfiles
-        run: ansible-playbook tests/test.yml -i tests/inventory --become
-
-      - name: test symbolic links
-        run: test "$(readlink -f ~/.zshrc.shared)" = "$HOME/dotfiles/zsh/zshrc.shared"
-      - name: check command existence in bash
-        run: bash -c hash nvim batcat bmon
-      - name: check command existence in zsh
-        run: zsh -c hash nvim batcat bmon
+      - name: Run Molecule tests
+        run: molecule test
+        env:
+          PY_COLORS: "1"
+          ANSIBLE_FORCE_COLOR: "1"
+          MOLECULE_DISTRO: ${{ matrix.distro }}
