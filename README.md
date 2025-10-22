@@ -83,6 +83,7 @@ molecule destroy
 ```
 
 The test suite validates:
+
 - Dotfiles repository is cloned
 - Symbolic links are created correctly
 - Required packages are installed
@@ -97,7 +98,10 @@ Including an example of how to use your role (for instance, with variables passe
 # playbook.yml
 - hosts: servers
   roles:
-    - { role: parham_alvani.ansible_role, vars: { dotfiles_home: ~/Documents/dotfiles } }
+    - {
+        role: parham_alvani.ansible_role,
+        vars: { dotfiles_home: ~/Documents/dotfiles },
+      }
 ```
 
 ```yaml
