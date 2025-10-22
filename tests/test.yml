@@ -1,7 +1,0 @@
----
-- name: Install on localhost
-  hosts: localhost
-  remote_user: root
-  roles:
-    - role: ..
-      name: ansible_role

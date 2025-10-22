@@ -1,1 +1,7 @@
 .ansible
+
+# uv
+test/.venv/
+test/uv.lock
+test/__pycache__/
+test/main.py

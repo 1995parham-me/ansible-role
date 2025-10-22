@@ -31,7 +31,7 @@
         fail_msg: ".zshrc.shared is not a symlink"
         success_msg: ".zshrc.shared symlink exists"
 
-    - name: Check if git is configured  # noqa: command-instead-of-module
+    - name: Check if git is configured # noqa: command-instead-of-module
       ansible.builtin.command: git config --get user.name
       register: git_name
       changed_when: false

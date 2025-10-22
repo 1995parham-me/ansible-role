@@ -1,0 +1,10 @@
+[project]
+name = "ansible-role-test"
+version = "0.1.0"
+description = "Testing dependencies for ansible-role"
+requires-python = ">=3.12"
+dependencies = [
+  "molecule>=24.0.0",
+  "molecule-plugins[docker]>=23.5.0",
+  "docker>=7.0.0",
+]
