@@ -28,8 +28,8 @@ jobs:
       - name: Run molecule tests
         run: uv run molecule test
         env:
-          PY_COLORS: '1'
-          ANSIBLE_FORCE_COLOR: '1'
+          PY_COLORS: "1"
+          ANSIBLE_FORCE_COLOR: "1"
 
       - name: Cleanup on failure
         if: failure()
