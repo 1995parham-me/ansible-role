@@ -4,6 +4,8 @@
   ansible.builtin.apt:
     update_cache: true
     pkg:
+      - git
+      - vim
       - htop
       - atop
       - aria2
