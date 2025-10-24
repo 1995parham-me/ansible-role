@@ -1,7 +1,14 @@
 .ansible
 
 # uv
+.venv/
+uv.lock
 test/.venv/
 test/uv.lock
 test/__pycache__/
 test/main.py
+
+# Molecule
+.cache/
+molecule/*/.molecule/
+.pytest_cache/

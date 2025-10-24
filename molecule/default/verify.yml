@@ -1,0 +1,31 @@
+---
+# Purpose: assert that the instance really ended up in the expected state.
+# Molecule calls this playbook with `molecule verify`.
+- name: Verify
+  hosts: all
+  gather_facts: true
+  tasks:
+    - name: Check if dotfiles directory exists
+      ansible.builtin.stat:
+        path: /tmp/dotfiles
+      register: dotfiles_dir
+
+    - name: Verify dotfiles directory was created
+      ansible.builtin.assert:
+        that:
+          - dotfiles_dir.stat.exists
+          - dotfiles_dir.stat.isdir
+        fail_msg: "Dotfiles directory was not created"
+
+    - name: Check if git is configured
+      ansible.builtin.command: git config --global user.email
+      register: git_email
+      changed_when: false
+      failed_when: false
+
+    - name: Verify git configuration
+      ansible.builtin.assert:
+        that:
+          - git_email.rc == 0
+          - git_email.stdout == "test@example.com"
+        fail_msg: "Git configuration is not set correctly"

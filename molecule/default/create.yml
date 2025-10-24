@@ -1,0 +1,49 @@
+---
+- name: Create
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  vars:
+    molecule_inventory:
+      all:
+        hosts: {}
+  tasks:
+    - name: Create Docker containers
+      community.docker.docker_container:
+        name: "{{ item.name }}"
+        image: "{{ item.image }}"
+        state: started
+        command: "{{ item.command | default('sleep infinity') }}"
+        privileged: "{{ item.privileged | default(omit) }}"
+        volumes: "{{ item.volumes | default(omit) }}"
+        capabilities: "{{ item.capabilities | default(omit) }}"
+      register: result
+      loop:
+        - name: ubuntu-latest
+          image: ubuntu:latest
+        - name: archlinux-latest
+          image: archlinux:base
+
+    - name: Populate instance config
+      ansible.builtin.set_fact:
+        instance_conf_dict:
+          instance: "{{ item.container.Name | regex_replace('^/', '') }}"
+          address: "{{ item.container.Name | regex_replace('^/', '') }}"
+          user: root
+          port: 22
+          connection: community.docker.docker
+      loop: "{{ result.results }}"
+      register: instance_config_dict
+
+    - name: Convert instance config dict to a list
+      ansible.builtin.set_fact:
+        instance_conf: "{{ instance_config_dict.results | map(attribute='ansible_facts.instance_conf_dict') | list }}"
+
+    - name: Dump instance config
+      ansible.builtin.copy:
+        content: |
+          # Molecule managed
+
+          {{ instance_conf | to_json | from_json | to_yaml }}
+        dest: "{{ molecule_instance_config }}"
+        mode: "0600"

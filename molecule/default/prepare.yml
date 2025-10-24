@@ -1,0 +1,46 @@
+---
+- name: Prepare (bootstrap)
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Install Python and sudo in containers
+      raw: |
+        if command -v apt-get >/dev/null; then
+          apt-get update && apt-get install -y python3 sudo
+        elif command -v pacman >/dev/null; then
+          pacman -Sy --noconfirm python sudo
+        fi
+      changed_when: false
+
+- name: Prepare (configure)
+  hosts: all
+  gather_facts: true
+  tasks:
+    - name: Create test user (Debian/Ubuntu)
+      ansible.builtin.user:
+        name: testuser
+        create_home: yes
+        shell: /bin/bash
+        groups: sudo
+        append: yes
+      become: true
+      when: ansible_os_family == 'Debian'
+
+    - name: Create test user (Arch)
+      ansible.builtin.user:
+        name: testuser
+        create_home: yes
+        shell: /bin/bash
+        groups: wheel
+        append: yes
+      become: true
+      when: ansible_os_family == 'Archlinux'
+
+    - name: Set up passwordless sudo for testuser
+      ansible.builtin.lineinfile:
+        path: /etc/sudoers
+        state: present
+        regexp: '^testuser'
+        line: 'testuser ALL=(ALL) NOPASSWD: ALL'
+        validate: '/usr/sbin/visudo -cf %s'
+      become: true

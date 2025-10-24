@@ -1,0 +1,17 @@
+---
+# Purpose: bring the instance to the desired state by running the role under test.
+# Molecule calls this playbook with `molecule converge`.
+- name: Converge
+  hosts: all
+  remote_user: testuser
+  gather_facts: true
+  vars:
+    dotfiles_home: /home/testuser/.dotfiles
+    git_email: test@example.com
+    git_name: "Test User"
+    github_keys_username: 1995parham
+    ansible_user: testuser
+  tasks:
+    - name: Apply role under test
+      ansible.builtin.include_role:
+        name: ansible-role

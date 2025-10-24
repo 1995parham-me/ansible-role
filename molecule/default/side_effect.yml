@@ -1,0 +1,5 @@
+---
+- name: Side effects
+  hosts: all
+  gather_facts: false
+  tasks: []
