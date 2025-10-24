@@ -7,6 +7,7 @@
       ansible.builtin.package:
         name:
           - python3
+          - python
           - sudo
         state: present
         update_cache: true
@@ -40,7 +41,7 @@
       ansible.builtin.lineinfile:
         path: /etc/sudoers
         state: present
-        regexp: '^testuser'
-        line: 'testuser ALL=(ALL) NOPASSWD: ALL'
-        validate: '/usr/sbin/visudo -cf %s'
+        regexp: "^testuser"
+        line: "testuser ALL=(ALL) NOPASSWD: ALL"
+        validate: "/usr/sbin/visudo -cf %s"
       become: true
