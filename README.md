@@ -1,8 +1,8 @@
 <h1 align="center"> 1995parham's dotfiles Ansible role </h1>
 
 <p align="center">
-  <img alt="GitHub Workflow Status" src="https://img.shields.io/github/actions/workflow/status/1995parham-me/ansible-role/ci.yml?logo=github&style=for-the-badge">
-  <img alt="GitHub Workflow Status" src="https://img.shields.io/github/actions/workflow/status/1995parham-me/ansible-role/test.yml?logo=github&style=for-the-badge">
+  <img alt="GitHub Workflow Status" src="https://img.shields.io/github/actions/workflow/status/1995parham-me/ansible-role/ci.yml?logo=github&style=for-the-badge&label=CI">
+  <img alt="GitHub Workflow Status" src="https://img.shields.io/github/actions/workflow/status/1995parham-me/ansible-role/test.yml?logo=github&style=for-the-badge&label=Test">
 </p>
 
 ## Introduction
