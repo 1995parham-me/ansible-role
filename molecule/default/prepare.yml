@@ -1,17 +1,16 @@
 ---
 - name: Prepare (bootstrap)
   hosts: all
-  gather_facts: true
+  gather_facts: false
   tasks:
-    - name: Install required packages
-      ansible.builtin.package:
-        name:
-          - python3
-          - python
-          - sudo
-        state: present
-        update_cache: true
-      become: true
+    - name: Install Python and sudo in containers
+      ansible.builtin.raw: |
+        if command -v apt-get >/dev/null; then
+          apt-get update && apt-get install -y python3 sudo
+        elif command -v pacman >/dev/null; then
+          pacman -Sy --noconfirm python sudo
+        fi
+      changed_when: false
 
 - name: Prepare (configure)
   hosts: all
