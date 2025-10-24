@@ -4,7 +4,7 @@
   gather_facts: false
   tasks:
     - name: Install Python and sudo in containers
-      raw: |
+      ansible.builtin.raw: |
         if command -v apt-get >/dev/null; then
           apt-get update && apt-get install -y python3 sudo
         elif command -v pacman >/dev/null; then
@@ -19,20 +19,20 @@
     - name: Create test user (Debian/Ubuntu)
       ansible.builtin.user:
         name: testuser
-        create_home: yes
+        create_home: true
         shell: /bin/bash
         groups: sudo
-        append: yes
+        append: true
       become: true
       when: ansible_os_family == 'Debian'
 
     - name: Create test user (Arch)
       ansible.builtin.user:
         name: testuser
-        create_home: yes
+        create_home: true
         shell: /bin/bash
         groups: wheel
-        append: yes
+        append: true
       become: true
       when: ansible_os_family == 'Archlinux'
 

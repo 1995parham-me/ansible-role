@@ -17,7 +17,7 @@
           - dotfiles_dir.stat.isdir
         fail_msg: "Dotfiles directory was not created"
 
-    - name: Check if git is configured
+    - name: Check if git is configured  # noqa: command-instead-of-module
       ansible.builtin.command: git config --global user.email
       register: git_email
       changed_when: false
