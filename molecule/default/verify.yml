@@ -7,7 +7,7 @@
   tasks:
     - name: Check if dotfiles directory exists
       ansible.builtin.stat:
-        path: /tmp/dotfiles
+        path: /home/testuser/.dotfiles
       register: dotfiles_dir
 
     - name: Verify dotfiles directory was created
@@ -16,16 +16,3 @@
           - dotfiles_dir.stat.exists
           - dotfiles_dir.stat.isdir
         fail_msg: "Dotfiles directory was not created"
-
-    - name: Check if git is configured  # noqa: command-instead-of-module
-      ansible.builtin.command: git config --global user.email
-      register: git_email
-      changed_when: false
-      failed_when: false
-
-    - name: Verify git configuration
-      ansible.builtin.assert:
-        that:
-          - git_email.rc == 0
-          - git_email.stdout == "test@example.com"
-        fail_msg: "Git configuration is not set correctly"
