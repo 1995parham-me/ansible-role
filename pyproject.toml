@@ -4,8 +4,8 @@ version = "0.1.0"
 description = "Testing dependencies for 1995parham ansible role"
 requires-python = ">=3.13"
 dependencies = [
-  "molecule>=6.0.0",
-  "molecule-plugins[docker]>=23.5.0",
-  "docker>=6.0.0",
-  "ansible-core>=2.19.0",
+  "molecule>=25.7.0",
+  "molecule-plugins[docker]>=25.8.12",
+  "docker>=7.1.0",
+  "ansible-core>=2.19.3",
 ]
