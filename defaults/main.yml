@@ -3,6 +3,7 @@ github_keys_username: "1995parham"
 
 dotfiles_home: "~/dotfiles"
 dotfiles_repo: "https://github.com/1995parham/dotfiles"
+dotfiles_version: "main"
 
 git_name: "Parham Alvani"
 git_email: "parham.alvani@gmail.com"
