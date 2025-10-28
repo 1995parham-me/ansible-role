@@ -1,21 +1,13 @@
 ---
-- name: Install packages [debian]
+- name: Install common packages [debian]
   become: true
   ansible.builtin.apt:
     update_cache: true
-    pkg:
-      - git
-      - vim
-      - htop
-      - atop
-      - aria2
-      - curl
-      - tmux
-      - bat
-      - jq
-      - yamllint
-      - bmon
-      - btop
-      - zsh
-      - speedtest-cli
+    pkg: "{{ common_packages }}"
+    state: present
+
+- name: Install Debian-specific packages
+  become: true
+  ansible.builtin.apt:
+    pkg: "{{ debian_packages }}"
     state: present

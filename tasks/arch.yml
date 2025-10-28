@@ -1,24 +1,15 @@
 ---
-- name: Install packages [arch]
+- name: Install common packages [arch]
   become: true
   community.general.pacman:
     state: present
-    name:
-      - git
-      - curl
-      - atop
-      - zsh
-      - tmux
-      - bat
-      - vim
-      - jq
-      - htop
-      - yamllint
-      - mtr
-      - inetutils
-      - dog
-      - man-pages
-      - base-devel
+    name: "{{ common_packages }}"
+
+- name: Install Arch-specific packages
+  become: true
+  community.general.pacman:
+    state: present
+    name: "{{ arch_packages }}"
 
 - name: Color in pacman
   become: true

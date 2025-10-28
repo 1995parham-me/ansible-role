@@ -1,2 +1,25 @@
 ---
-# vars file for 1995parham-me
+common_packages:
+  - git
+  - vim
+  - htop
+  - atop
+  - curl
+  - tmux
+  - bat
+  - jq
+  - yamllint
+  - zsh
+
+debian_packages:
+  - aria2
+  - bmon
+  - btop
+  - speedtest-cli
+
+arch_packages:
+  - mtr
+  - inetutils
+  - dog
+  - man-pages
+  - base-devel
