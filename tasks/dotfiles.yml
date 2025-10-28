@@ -4,6 +4,7 @@
   ansible.builtin.git:
     repo: "{{ dotfiles_repo }}"
     dest: "{{ dotfiles_home }}"
+    version: "{{ dotfiles_version }}"
     accept_hostkey: true
     update: true
   register: dotfiles_git_update
