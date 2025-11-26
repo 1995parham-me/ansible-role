@@ -24,7 +24,7 @@
         groups: sudo
         append: true
       become: true
-      when: ansible_os_family == 'Debian'
+      when: ansible_facts['os_family'] == 'Debian'
 
     - name: Create test user (Arch)
       ansible.builtin.user:
@@ -34,7 +34,7 @@
         groups: wheel
         append: true
       become: true
-      when: ansible_os_family == 'Archlinux'
+      when: ansible_facts['os_family'] == 'Archlinux'
 
     - name: Set up passwordless sudo for testuser
       ansible.builtin.lineinfile:
