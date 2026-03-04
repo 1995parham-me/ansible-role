@@ -11,19 +11,19 @@
 
 - name: Install zsh
   become: false
-  ansible.builtin.command: "{{ dotfiles_home }}/start.sh -y zsh"
+  ansible.builtin.command: "{{ dotfiles_home }}/start.sh --allow-root -y zsh"
   when: dotfiles_git_update.after != dotfiles_git_update.before
   changed_when: dotfiles_git_update.after != dotfiles_git_update.before
 
 - name: Install bash
   become: false
-  ansible.builtin.command: "{{ dotfiles_home }}/start.sh -y bash"
+  ansible.builtin.command: "{{ dotfiles_home }}/start.sh --allow-root -y bash"
   when: dotfiles_git_update.after != dotfiles_git_update.before
   changed_when: dotfiles_git_update.after != dotfiles_git_update.before
 
 - name: Install env
   become: false
-  ansible.builtin.command: "{{ dotfiles_home }}/start.sh -y env"
+  ansible.builtin.command: "{{ dotfiles_home }}/start.sh --allow-root -y env"
   when: dotfiles_git_update.after != dotfiles_git_update.before
   changed_when: dotfiles_git_update.after != dotfiles_git_update.before
 
@@ -35,6 +35,6 @@
 
 - name: Install starship
   become: false
-  ansible.builtin.command: "{{ dotfiles_home }}/start.sh -y starship"
+  ansible.builtin.command: "{{ dotfiles_home }}/start.sh --allow-root -y starship"
   when: dotfiles_git_update.after != dotfiles_git_update.before
   changed_when: dotfiles_git_update.after != dotfiles_git_update.before
