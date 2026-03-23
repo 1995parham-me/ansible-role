@@ -14,4 +14,4 @@
   tasks:
     - name: Apply role under test
       ansible.builtin.include_role:
-        name: ansible-role
+        name: parham_alvani.dotfiles.setup

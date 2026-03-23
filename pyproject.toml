@@ -1,7 +1,7 @@
 [project]
-name = "ansible-role-testing"
+name = "parham-alvani-dotfiles-testing"
 version = "0.1.0"
-description = "Testing dependencies for 1995parham ansible role"
+description = "Testing dependencies for parham_alvani.dotfiles ansible collection"
 requires-python = ">=3.13"
 dependencies = [
   "molecule>=25.7.0",

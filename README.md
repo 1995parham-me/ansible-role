@@ -1,4 +1,4 @@
-<h1 align="center"> 1995parham's dotfiles Ansible role </h1>
+<h1 align="center"> parham_alvani.dotfiles </h1>
 
 <p align="center">
   <img alt="GitHub Workflow Status" src="https://img.shields.io/github/actions/workflow/status/1995parham-me/ansible-role/ci.yml?logo=github&style=for-the-badge&label=CI">
@@ -7,7 +7,7 @@
 
 ## Introduction
 
-This role installs the Parham Alvani's dotfiles from its [source](https://github.com/1995parham/dotfiles).
+An Ansible collection that installs Parham Alvani's dotfiles from its [source](https://github.com/1995parham/dotfiles).
 It also installs the required packages, vim plugins, etc.
 
 The following modules are configured with `install.sh`:
@@ -18,17 +18,40 @@ The following modules are configured with `install.sh`:
 - `git`
 - bash and python scripts (`owghat`, `rename`, etc.)
 
-## Requirements
+## Installation
 
-This role depends on `community.general` and `ansible.posix` collections. Install them using:
+Install the collection from the Git repository:
+
+```bash
+ansible-galaxy collection install git+https://github.com/1995parham-me/ansible-role.git,main
+```
+
+Or add it to your `requirements.yml`:
+
+```yaml
+collections:
+  - name: https://github.com/1995parham-me/ansible-role.git
+    type: git
+    version: main
+```
+
+Then install with:
 
 ```bash
 ansible-galaxy collection install -r requirements.yml
 ```
 
-## Role Variables
+Collection dependencies (`community.general` and `ansible.posix`) are automatically resolved during installation.
 
-### Required Variables
+## Roles
+
+### `parham_alvani.dotfiles.setup`
+
+The main role that installs dotfiles and configures the development environment.
+
+#### Role Variables
+
+##### Required Variables
 
 `dotfiles_home` specifies the directory for dotfiles. Please note that all configurations are softly linked to this location, so you need
 to re-run this role in case of `dotfiles_home` change.
@@ -62,7 +85,7 @@ git_name: "Parham Alvani"  # Default value
 github_keys_username: 1995parham  # Default value
 ```
 
-### System Configuration Variables
+##### System Configuration Variables
 
 `config_system_enabled` controls whether system-level locale configuration should be applied. Set to `true` to enable locale management.
 
@@ -84,50 +107,45 @@ config_system_language: en_US.UTF-8  # Default value
 
 ## Testing
 
-This role uses [Molecule](https://molecule.readthedocs.io/) for testing with Docker containers.
+This collection uses [Molecule](https://molecule.readthedocs.io/) for testing with Docker containers.
 
 ### Prerequisites
 
-Install Molecule and Docker support:
+Install dependencies using [uv](https://docs.astral.sh/uv/):
 
 ```bash
-pip install molecule molecule-plugins[docker] docker
+uv sync
 ```
 
 ### Run Tests
 
-Run the complete test suite (creates containers, applies role, verifies, and destroys):
+Set up the local collection symlink and run the complete test suite:
 
 ```bash
-molecule test
+just test
 ```
 
 Or run individual steps:
 
 ```bash
-# Create containers
-molecule create
+# Create collection symlink for local testing
+just setup
+
+# Create and prepare containers
+just prepare
 
 # Apply the role
-molecule converge
+just converge
 
 # Run verification tests
-molecule verify
+just verify
 
 # Login to a container for debugging
-molecule login --host ubuntu-jammy
+just shell ubuntu-latest
 
 # Destroy containers
-molecule destroy
+just destroy
 ```
-
-The test suite validates:
-
-- Dotfiles repository is cloned
-- Symbolic links are created correctly
-- Required packages are installed
-- Git configuration is set up
-- ZSH is installed and configured
 
 ## Example Playbook
 
@@ -137,7 +155,7 @@ The test suite validates:
 # playbook.yml
 - hosts: servers
   roles:
-    - role: parham_alvani.ansible_role
+    - role: parham_alvani.dotfiles.setup
       vars:
         dotfiles_home: ~/Documents/dotfiles
         git_email: your.email@example.com
@@ -151,31 +169,15 @@ The test suite validates:
 # playbook.yml
 - hosts: servers
   roles:
-    - role: parham_alvani.ansible_role
+    - role: parham_alvani.dotfiles.setup
       vars:
         dotfiles_home: ~/.dotfiles
         dotfiles_repo: https://github.com/yourusername/dotfiles
-        dotfiles_version: v1.0.0  # Pin to specific version/tag/branch
+        dotfiles_version: v1.0.0
         git_email: your.email@example.com
         git_name: "Your Name"
         github_keys_username: your-github-username
         config_system_enabled: true
         config_system_locale: en_US.UTF-8
         config_system_language: en_US.UTF-8
-```
-
-### Role Installation
-
-```yaml
-# requirements.yml
-- src: https://github.com/1995parham-me/ansible-role.git
-  scm: git
-  version: main
-  name: parham_alvani.ansible_role
-```
-
-Then install with:
-
-```bash
-ansible-galaxy role install -r requirements.yml
 ```

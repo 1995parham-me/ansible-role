@@ -1,0 +1,15 @@
+---
+galaxy_info:
+  author: Parham Alvani
+  description: Install @1995parham/dotfiles and configure development environment
+  license: GPL-3.0-or-later
+  min_ansible_version: "2.15"
+  platforms:
+    - name: Ubuntu
+      versions:
+        - focal
+        - jammy
+        - noble
+    - name: ArchLinux
+
+dependencies: []

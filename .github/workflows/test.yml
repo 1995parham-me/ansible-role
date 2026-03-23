@@ -25,6 +25,11 @@ jobs:
       - name: Install dependencies
         run: uv sync
 
+      - name: Create collection symlink
+        run: |
+          mkdir -p .collections/ansible_collections/parham_alvani
+          ln -sfn "$(pwd)" .collections/ansible_collections/parham_alvani/dotfiles
+
       - name: Run molecule tests
         run: uv run molecule test
         env:

@@ -1,12 +1,17 @@
 default:
     @just --list
 
+# create symlink structure so ansible can discover the collection locally
+setup:
+    mkdir -p .collections/ansible_collections/parham_alvani
+    ln -sfn "$(pwd)" .collections/ansible_collections/parham_alvani/dotfiles
+
 # run molecule converge (apply role to test containers)
-converge:
+converge: setup
     uv run molecule converge
 
 # run molecule test (full test suite)
-test:
+test: setup
     uv run molecule test
 
 # destroy test containers
@@ -14,7 +19,7 @@ destroy:
     uv run molecule destroy
 
 # create and prepare test containers
-prepare:
+prepare: setup
     uv run molecule create
     uv run molecule prepare
 
@@ -32,3 +37,7 @@ shell container:
 
 # clean up and run full test
 clean-test: destroy test
+
+# build the collection artifact
+build:
+    ansible-galaxy collection build --force

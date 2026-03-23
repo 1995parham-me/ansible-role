@@ -1,0 +1,36 @@
+---
+namespace: parham_alvani
+name: dotfiles
+version: "1.0.0"
+readme: README.md
+authors:
+  - Parham Alvani <parham.alvani@gmail.com>
+description: Install and configure @1995parham/dotfiles with associated packages and tools
+license:
+  - GPL-3.0-or-later
+tags:
+  - dotfiles
+  - development
+  - zsh
+  - vim
+  - tmux
+  - configuration
+  - shell
+  - git
+repository: https://github.com/1995parham-me/ansible-role
+homepage: https://github.com/1995parham-me/ansible-role
+issues: https://github.com/1995parham-me/ansible-role/issues
+dependencies:
+  "community.general": ">=11.4.0"
+  "ansible.posix": ">=2.1.0"
+build_ignore:
+  - .github
+  - .gitignore
+  - .ansible-lint
+  - .python-version
+  - molecule
+  - justfile
+  - pyproject.toml
+  - uv.lock
+  - .venv
+  - .cache

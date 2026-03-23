@@ -1,5 +1,11 @@
 .ansible
 
+# Collection symlink for local testing
+.collections/
+
+# Collection build artifacts
+*.tar.gz
+
 # uv
 .venv/
 uv.lock

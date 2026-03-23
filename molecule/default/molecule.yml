@@ -1,11 +1,7 @@
 ---
-# Dependency management (download roles/collections)
 dependency:
   name: galaxy
   options:
-    ignore-certs: false
-    ignore-errors: false
-    role-file: requirements.yml
     requirements-file: requirements.yml
 
 platforms:
@@ -17,7 +13,7 @@ ansible:
     defaults:
       host_key_checking: false
       verbosity: 1
-      roles_path: ${MOLECULE_PROJECT_DIRECTORY}/..
+      collections_path: ${MOLECULE_PROJECT_DIRECTORY}/../../.collections:~/.ansible/collections
     ssh_connection:
       pipelining: true
   env:
