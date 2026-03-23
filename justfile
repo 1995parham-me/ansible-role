@@ -37,7 +37,3 @@ shell container:
 
 # clean up and run full test
 clean-test: destroy test
-
-# build the collection artifact
-build:
-    ansible-galaxy collection build --force
