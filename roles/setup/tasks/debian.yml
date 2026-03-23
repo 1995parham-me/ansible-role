@@ -3,11 +3,11 @@
   become: true
   ansible.builtin.apt:
     update_cache: true
-    pkg: "{{ common_packages }}"
+    pkg: "{{ setup_common_packages }}"
     state: present
 
 - name: Install Debian-specific packages
   become: true
   ansible.builtin.apt:
-    pkg: "{{ debian_packages }}"
+    pkg: "{{ setup_debian_packages }}"
     state: present

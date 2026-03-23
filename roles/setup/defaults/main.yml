@@ -1,13 +1,13 @@
 ---
-github_keys_username: "1995parham"
+setup_github_keys_username: "1995parham"
 
-dotfiles_home: "~/dotfiles"
-dotfiles_repo: "https://github.com/1995parham/dotfiles"
-dotfiles_version: "main"
+setup_dotfiles_home: "~/dotfiles"
+setup_dotfiles_repo: "https://github.com/1995parham/dotfiles"
+setup_dotfiles_version: "main"
 
-git_name: "Parham Alvani"
-git_email: "parham.alvani@gmail.com"
+setup_git_name: "Parham Alvani"
+setup_git_email: "parham.alvani@gmail.com"
 
-config_system_enabled: false
-config_system_locale: 'en_US.UTF-8'
-config_system_language: 'en_US.UTF-8'
+setup_config_system_enabled: false
+setup_config_system_locale: 'en_US.UTF-8'
+setup_config_system_language: 'en_US.UTF-8'

@@ -9,6 +9,8 @@ description: Install and configure @1995parham/dotfiles with associated packages
 license:
   - GPL-3.0-or-later
 tags:
+  - tools
+  - linux
   - dotfiles
   - development
   - zsh

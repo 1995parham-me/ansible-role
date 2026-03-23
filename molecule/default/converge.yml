@@ -6,10 +6,10 @@
   remote_user: testuser
   gather_facts: true
   vars:
-    dotfiles_home: /home/testuser/.dotfiles
-    git_email: test@example.com
-    git_name: "Test User"
-    github_keys_username: 1995parham
+    setup_dotfiles_home: /home/testuser/.dotfiles
+    setup_git_email: test@example.com
+    setup_git_name: "Test User"
+    setup_github_keys_username: 1995parham
     ansible_user: testuser
   tasks:
     - name: Apply role under test

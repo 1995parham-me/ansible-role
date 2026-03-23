@@ -3,4 +3,4 @@
   ansible.posix.authorized_key:
     user: "{{ ansible_facts['user_id'] }}"
     state: present
-    key: https://github.com/{{ github_keys_username }}.keys
+    key: https://github.com/{{ setup_github_keys_username }}.keys

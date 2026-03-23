@@ -3,13 +3,13 @@
   become: true
   community.general.pacman:
     state: present
-    name: "{{ common_packages }}"
+    name: "{{ setup_common_packages }}"
 
 - name: Install Arch-specific packages
   become: true
   community.general.pacman:
     state: present
-    name: "{{ arch_packages }}"
+    name: "{{ setup_arch_packages }}"
 
 - name: Color in pacman
   become: true

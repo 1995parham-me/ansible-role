@@ -53,56 +53,56 @@ The main role that installs dotfiles and configures the development environment.
 
 ##### Required Variables
 
-`dotfiles_home` specifies the directory for dotfiles. Please note that all configurations are softly linked to this location, so you need
-to re-run this role in case of `dotfiles_home` change.
+`setup_dotfiles_home` specifies the directory for dotfiles. Please note that all configurations are softly linked to this location, so you need
+to re-run this role in case of `setup_dotfiles_home` change.
 
 ```yaml
-dotfiles_home: ~/dotfiles  # Default value
+setup_dotfiles_home: ~/dotfiles  # Default value
 ```
 
-`dotfiles_repo` specifies the Git repository URL for the dotfiles.
+`setup_dotfiles_repo` specifies the Git repository URL for the dotfiles.
 
 ```yaml
-dotfiles_repo: https://github.com/1995parham/dotfiles  # Default value
+setup_dotfiles_repo: https://github.com/1995parham/dotfiles  # Default value
 ```
 
-`dotfiles_version` specifies the Git branch, tag, or commit to checkout. This allows you to pin a specific version of your dotfiles.
+`setup_dotfiles_version` specifies the Git branch, tag, or commit to checkout. This allows you to pin a specific version of your dotfiles.
 
 ```yaml
-dotfiles_version: main  # Default value, can be a branch, tag, or commit SHA
+setup_dotfiles_version: main  # Default value, can be a branch, tag, or commit SHA
 ```
 
-`git_email` and `git_name` contains the user email and name for the git. They are useful if you want to commit anything from your target.
+`setup_git_email` and `setup_git_name` contains the user email and name for the git. They are useful if you want to commit anything from your target.
 
 ```yaml
-git_email: parham.alvani@gmail.com  # Default value
-git_name: "Parham Alvani"  # Default value
+setup_git_email: parham.alvani@gmail.com  # Default value
+setup_git_name: "Parham Alvani"  # Default value
 ```
 
-`github_keys_username` is used for fetching trusted SSH keys from GitHub. By default it fetches **1995parham** keys, so you must update it.
+`setup_github_keys_username` is used for fetching trusted SSH keys from GitHub. By default it fetches **1995parham** keys, so you must update it.
 
 ```yaml
-github_keys_username: 1995parham  # Default value
+setup_github_keys_username: 1995parham  # Default value
 ```
 
 ##### System Configuration Variables
 
-`config_system_enabled` controls whether system-level locale configuration should be applied. Set to `true` to enable locale management.
+`setup_config_system_enabled` controls whether system-level locale configuration should be applied. Set to `true` to enable locale management.
 
 ```yaml
-config_system_enabled: false  # Default value
+setup_config_system_enabled: false  # Default value
 ```
 
-`config_system_locale` specifies the system locale to be configured when `config_system_enabled` is `true`.
+`setup_config_system_locale` specifies the system locale to be configured when `setup_config_system_enabled` is `true`.
 
 ```yaml
-config_system_locale: en_US.UTF-8  # Default value
+setup_config_system_locale: en_US.UTF-8  # Default value
 ```
 
-`config_system_language` specifies the system language to be configured when `config_system_enabled` is `true`.
+`setup_config_system_language` specifies the system language to be configured when `setup_config_system_enabled` is `true`.
 
 ```yaml
-config_system_language: en_US.UTF-8  # Default value
+setup_config_system_language: en_US.UTF-8  # Default value
 ```
 
 ## Testing
@@ -157,10 +157,10 @@ just destroy
   roles:
     - role: parham_alvani.dotfiles.setup
       vars:
-        dotfiles_home: ~/Documents/dotfiles
-        git_email: your.email@example.com
-        git_name: "Your Name"
-        github_keys_username: your-github-username
+        setup_dotfiles_home: ~/Documents/dotfiles
+        setup_git_email: your.email@example.com
+        setup_git_name: "Your Name"
+        setup_github_keys_username: your-github-username
 ```
 
 ### Advanced Usage with System Configuration
@@ -171,13 +171,13 @@ just destroy
   roles:
     - role: parham_alvani.dotfiles.setup
       vars:
-        dotfiles_home: ~/.dotfiles
-        dotfiles_repo: https://github.com/yourusername/dotfiles
-        dotfiles_version: v1.0.0
-        git_email: your.email@example.com
-        git_name: "Your Name"
-        github_keys_username: your-github-username
-        config_system_enabled: true
-        config_system_locale: en_US.UTF-8
-        config_system_language: en_US.UTF-8
+        setup_dotfiles_home: ~/.dotfiles
+        setup_dotfiles_repo: https://github.com/yourusername/dotfiles
+        setup_dotfiles_version: v1.0.0
+        setup_git_email: your.email@example.com
+        setup_git_name: "Your Name"
+        setup_github_keys_username: your-github-username
+        setup_config_system_enabled: true
+        setup_config_system_locale: en_US.UTF-8
+        setup_config_system_language: en_US.UTF-8
 ```

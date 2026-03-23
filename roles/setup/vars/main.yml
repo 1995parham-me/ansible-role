@@ -1,5 +1,5 @@
 ---
-common_packages:
+setup_common_packages:
   - git
   - vim
   - htop
@@ -11,13 +11,13 @@ common_packages:
   - yamllint
   - zsh
 
-debian_packages:
+setup_debian_packages:
   - aria2
   - bmon
   - btop
   - speedtest-cli
 
-arch_packages:
+setup_arch_packages:
   - mtr
   - inetutils
   - dog

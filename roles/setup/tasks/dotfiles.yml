@@ -2,39 +2,39 @@
 - name: Clone dotfiles
   become: false
   ansible.builtin.git:
-    repo: "{{ dotfiles_repo }}"
-    dest: "{{ dotfiles_home }}"
-    version: "{{ dotfiles_version }}"
+    repo: "{{ setup_dotfiles_repo }}"
+    dest: "{{ setup_dotfiles_home }}"
+    version: "{{ setup_dotfiles_version }}"
     accept_hostkey: true
     update: true
-  register: dotfiles_git_update
+  register: setup_dotfiles_git_update
 
 - name: Install zsh
   become: false
-  ansible.builtin.command: "{{ dotfiles_home }}/start.sh --allow-root -y zsh"
-  when: dotfiles_git_update.after != dotfiles_git_update.before
-  changed_when: dotfiles_git_update.after != dotfiles_git_update.before
+  ansible.builtin.command: "{{ setup_dotfiles_home }}/start.sh --allow-root -y zsh"
+  when: setup_dotfiles_git_update.after != setup_dotfiles_git_update.before
+  changed_when: setup_dotfiles_git_update.after != setup_dotfiles_git_update.before
 
 - name: Install bash
   become: false
-  ansible.builtin.command: "{{ dotfiles_home }}/start.sh --allow-root -y bash"
-  when: dotfiles_git_update.after != dotfiles_git_update.before
-  changed_when: dotfiles_git_update.after != dotfiles_git_update.before
+  ansible.builtin.command: "{{ setup_dotfiles_home }}/start.sh --allow-root -y bash"
+  when: setup_dotfiles_git_update.after != setup_dotfiles_git_update.before
+  changed_when: setup_dotfiles_git_update.after != setup_dotfiles_git_update.before
 
 - name: Install env
   become: false
-  ansible.builtin.command: "{{ dotfiles_home }}/start.sh --allow-root -y env"
-  when: dotfiles_git_update.after != dotfiles_git_update.before
-  changed_when: dotfiles_git_update.after != dotfiles_git_update.before
+  ansible.builtin.command: "{{ setup_dotfiles_home }}/start.sh --allow-root -y env"
+  when: setup_dotfiles_git_update.after != setup_dotfiles_git_update.before
+  changed_when: setup_dotfiles_git_update.after != setup_dotfiles_git_update.before
 
 - name: Install dotfiles
   become: false
-  ansible.builtin.command: "{{ dotfiles_home }}/install.sh"
-  when: dotfiles_git_update.after != dotfiles_git_update.before
-  changed_when: dotfiles_git_update.after != dotfiles_git_update.before
+  ansible.builtin.command: "{{ setup_dotfiles_home }}/install.sh"
+  when: setup_dotfiles_git_update.after != setup_dotfiles_git_update.before
+  changed_when: setup_dotfiles_git_update.after != setup_dotfiles_git_update.before
 
 - name: Install starship
   become: false
-  ansible.builtin.command: "{{ dotfiles_home }}/start.sh --allow-root -y starship"
-  when: dotfiles_git_update.after != dotfiles_git_update.before
-  changed_when: dotfiles_git_update.after != dotfiles_git_update.before
+  ansible.builtin.command: "{{ setup_dotfiles_home }}/start.sh --allow-root -y starship"
+  when: setup_dotfiles_git_update.after != setup_dotfiles_git_update.before
+  changed_when: setup_dotfiles_git_update.after != setup_dotfiles_git_update.before

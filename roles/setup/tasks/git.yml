@@ -4,11 +4,11 @@
   community.general.git_config:
     name: user.name
     scope: global
-    value: "{{ git_name }}"
+    value: "{{ setup_git_name }}"
 
 - name: Setup git email
   become: false
   community.general.git_config:
     name: user.email
     scope: global
-    value: "{{ git_email }}"
+    value: "{{ setup_git_email }}"
