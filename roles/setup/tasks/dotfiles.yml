@@ -1,5 +1,14 @@
 ---
-- name: Clone dotfiles
+# Clone the dotfiles repository onto the target.
+#
+# Two modes:
+#   online (default) — run `git clone` directly on the target.
+#   offline          — clone on the control node, then rsync to the target.
+#                      Needed for air-gapped / restricted-network hosts that
+#                      cannot reach github.com.
+
+- name: Clone dotfiles (online mode)
+  when: not setup_offline | bool
   become: false
   ansible.builtin.git:
     repo: "{{ setup_dotfiles_repo }}"
@@ -8,6 +17,62 @@
     accept_hostkey: true
     update: true
   register: setup_dotfiles_git_update
+
+- name: Offline dotfiles pipeline
+  when: setup_offline | bool
+  block:
+    - name: Compute per-repo cache path on control node
+      ansible.builtin.set_fact:
+        setup_offline_repo_cache: >-
+          {{ setup_offline_cache_dir }}/{{
+            setup_dotfiles_repo | regex_replace('[^A-Za-z0-9_.-]', '_')
+          }}
+      run_once: true
+
+    - name: Ensure control-node cache directory exists
+      ansible.builtin.file:
+        path: "{{ setup_offline_cache_dir }}"
+        state: directory
+        mode: "0755"
+      delegate_to: localhost
+      become: false
+      run_once: true
+
+    - name: Clone dotfiles on control node
+      ansible.builtin.git:
+        repo: "{{ setup_dotfiles_repo }}"
+        dest: "{{ setup_offline_repo_cache }}"
+        version: "{{ setup_dotfiles_version }}"
+        accept_hostkey: true
+        update: true
+      delegate_to: localhost
+      become: false
+      run_once: true
+      register: setup_dotfiles_local_clone
+
+    - name: Ensure dotfiles home exists on target
+      become: false
+      ansible.builtin.file:
+        path: "{{ setup_dotfiles_home }}"
+        state: directory
+        mode: "0755"
+
+    - name: Synchronize dotfiles from control node to target
+      become: false
+      ansible.posix.synchronize:
+        src: "{{ setup_offline_repo_cache }}/"
+        dest: "{{ setup_dotfiles_home }}/"
+        delete: true
+        recursive: true
+        rsync_opts:
+          - "--exclude=.git/hooks"
+      register: setup_dotfiles_sync
+
+    - name: Construct offline git-update result for downstream tasks
+      ansible.builtin.set_fact:
+        setup_dotfiles_git_update:
+          before: "{{ '' if setup_dotfiles_sync.changed else setup_dotfiles_local_clone.after | default('') }}"
+          after: "{{ setup_dotfiles_local_clone.after | default('') }}"
 
 - name: Install zsh
   become: false

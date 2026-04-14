@@ -105,6 +105,32 @@ setup_config_system_locale: en_US.UTF-8  # Default value
 setup_config_system_language: en_US.UTF-8  # Default value
 ```
 
+##### Offline Mode (Restricted Networks)
+
+`setup_offline` enables a mode for targets that cannot reach `github.com` directly (e.g., air-gapped hosts or machines on restricted networks). When enabled, the Ansible **control node** clones the dotfiles repo and fetches GitHub SSH keys, then pushes both to the target via rsync. The target only needs its local package manager mirror to be reachable.
+
+```yaml
+setup_offline: false  # Default value
+```
+
+`setup_offline_cache_dir` is the directory on the control node where the dotfiles repo is cached. One subdirectory is created per repo URL.
+
+```yaml
+setup_offline_cache_dir: "~/.cache/parham_alvani.dotfiles"  # Default value
+```
+
+Offline mode requires `rsync` on both the control node and the target.
+
+```yaml
+# playbook.yml
+- hosts: restricted_server
+  roles:
+    - role: parham_alvani.dotfiles.setup
+      vars:
+        setup_offline: true
+        setup_github_keys_username: your-github-username
+```
+
 ## Testing
 
 This collection uses [Molecule](https://molecule.readthedocs.io/) for testing with Docker containers.

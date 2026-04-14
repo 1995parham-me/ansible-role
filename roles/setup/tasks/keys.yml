@@ -1,6 +1,33 @@
 ---
-- name: Set authorized keys taken from github
+# Authorize SSH keys from GitHub for the current user.
+#
+# In online mode, the target fetches https://github.com/<user>.keys directly.
+# In offline mode, the control node fetches the keys and pushes each line as
+# a separate authorized_key entry — this works for air-gapped targets that
+# cannot reach github.com.
+
+- name: Authorize GitHub keys (online mode)
+  when: not setup_offline | bool
   ansible.posix.authorized_key:
     user: "{{ ansible_facts['user_id'] }}"
     state: present
     key: https://github.com/{{ setup_github_keys_username }}.keys
+
+- name: Authorize GitHub keys (offline mode)
+  when: setup_offline | bool
+  block:
+    - name: Fetch GitHub keys on control node
+      ansible.builtin.uri:
+        url: "https://github.com/{{ setup_github_keys_username }}.keys"
+        return_content: true
+      delegate_to: localhost
+      become: false
+      run_once: true
+      register: setup_offline_github_keys
+
+    - name: Authorize each fetched key on target
+      ansible.posix.authorized_key:
+        user: "{{ ansible_facts['user_id'] }}"
+        state: present
+        key: "{{ item }}"
+      loop: "{{ setup_offline_github_keys.content.splitlines() | select('match', '^ssh-') | list }}"

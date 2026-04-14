@@ -11,3 +11,17 @@ setup_git_email: "parham.alvani@gmail.com"
 setup_config_system_enabled: false
 setup_config_system_locale: 'en_US.UTF-8'
 setup_config_system_language: 'en_US.UTF-8'
+
+# Offline mode: target machine has no internet access (e.g., restricted network).
+# When true:
+#   - The dotfiles repo is cloned on the Ansible control node into
+#     `setup_offline_cache_dir` and synchronized to the target via rsync.
+#   - GitHub SSH keys are fetched on the control node and pushed to the
+#     target instead of being fetched directly by the target.
+# The target still needs local package manager access (e.g., a distro mirror
+# reachable on the restricted network) for apt/pacman tasks.
+setup_offline: false
+
+# Directory on the CONTROL node where the dotfiles repo is cloned when
+# running in offline mode. One cache per repo URL.
+setup_offline_cache_dir: "{{ lookup('env', 'HOME') }}/.cache/parham_alvani.dotfiles"
