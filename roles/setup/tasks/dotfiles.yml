@@ -74,32 +74,46 @@
           before: "{{ '' if setup_dotfiles_sync.changed else setup_dotfiles_local_clone.after | default('') }}"
           after: "{{ setup_dotfiles_local_clone.after | default('') }}"
 
+# OFFLINE=1 in the dotfiles' scripts/lib/github.sh:require_github_release
+# short-circuits binary-release fetches that would otherwise reach
+# github.com. Forwarding setup_offline here means an airgapped target
+# does not hang for ~5 minutes per github-release dependency.
 - name: Install zsh
   become: false
   ansible.builtin.command: "{{ setup_dotfiles_home }}/start.sh --allow-root -y zsh"
   when: setup_dotfiles_git_update.after != setup_dotfiles_git_update.before
   changed_when: setup_dotfiles_git_update.after != setup_dotfiles_git_update.before
+  environment:
+    OFFLINE: "{{ '1' if setup_offline | bool else '0' }}"
 
 - name: Install bash
   become: false
   ansible.builtin.command: "{{ setup_dotfiles_home }}/start.sh --allow-root -y bash"
   when: setup_dotfiles_git_update.after != setup_dotfiles_git_update.before
   changed_when: setup_dotfiles_git_update.after != setup_dotfiles_git_update.before
+  environment:
+    OFFLINE: "{{ '1' if setup_offline | bool else '0' }}"
 
 - name: Install env
   become: false
   ansible.builtin.command: "{{ setup_dotfiles_home }}/start.sh --allow-root -y env"
   when: setup_dotfiles_git_update.after != setup_dotfiles_git_update.before
   changed_when: setup_dotfiles_git_update.after != setup_dotfiles_git_update.before
+  environment:
+    OFFLINE: "{{ '1' if setup_offline | bool else '0' }}"
 
 - name: Install dotfiles
   become: false
   ansible.builtin.command: "{{ setup_dotfiles_home }}/install.sh"
   when: setup_dotfiles_git_update.after != setup_dotfiles_git_update.before
   changed_when: setup_dotfiles_git_update.after != setup_dotfiles_git_update.before
+  environment:
+    OFFLINE: "{{ '1' if setup_offline | bool else '0' }}"
 
 - name: Install starship
   become: false
   ansible.builtin.command: "{{ setup_dotfiles_home }}/start.sh --allow-root -y starship"
   when: setup_dotfiles_git_update.after != setup_dotfiles_git_update.before
   changed_when: setup_dotfiles_git_update.after != setup_dotfiles_git_update.before
+  environment:
+    OFFLINE: "{{ '1' if setup_offline | bool else '0' }}"
