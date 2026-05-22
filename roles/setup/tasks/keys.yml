@@ -17,12 +17,17 @@
   when: setup_offline | bool
   block:
     - name: Fetch GitHub keys on control node
+      # check_mode: false so the fetch runs in --check too; otherwise the
+      # registered result has no .content and the loop below explodes on
+      # `splitlines()` of an undefined attribute. The fetch itself is a
+      # read-only GET on the control node, safe under check.
       ansible.builtin.uri:
         url: "https://github.com/{{ setup_github_keys_username }}.keys"
         return_content: true
       delegate_to: localhost
       become: false
       run_once: true
+      check_mode: false
       register: setup_offline_github_keys
 
     - name: Authorize each fetched key on target
